@@ -1,7 +1,9 @@
 import re
+from utils import Rule
+from utils import Condition
 
 n = 0
-def rule_from_line(line):
+def rule_from_line(line) -> Rule:
     line = line.strip()
     if not line:
         return None  # Skip empty lines
@@ -22,12 +24,11 @@ def rule_from_line(line):
             negated = True
             condition_str = condition_str[4:].strip()
 
-        conditions.append({"variable": condition_str, "negated": negated})
+        conditions.append(Condition(condition_str, negated))
 
     global n
     n += 1
-    rule = {"id": n, "conditions": conditions} 
-    return rule
+    return Rule(n, conditions) 
 
 
 
@@ -49,6 +50,8 @@ def read_rules(file_path = file_path):
                 rule = rule_from_line(line)
                 if rule is not None:
                     rules.append(rule)
+        # for rule in rules:
+        #     print(rule)
         return rules
     except FileNotFoundError:
         print(f"Error: File not found at {file_path}")

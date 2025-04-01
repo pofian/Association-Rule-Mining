@@ -1,4 +1,5 @@
 import csv
+from utils import Donor
 
 file_path = "dataset.tsv"
 def read_tsv(file_path=file_path, delimiter='\t', quotechar=None):
@@ -35,15 +36,8 @@ def read_donors():
     for id, row in enumerate(parsed_data):
         if row is attributes:
             continue
-        donor = {'id': id, 'donor_is_old': row[0]}
-        donor['atrributes'] = {attribute: value for attribute, value in zip(attributes[1:], row[1:])}
-        # print(donor)
-        # print("\n")
+
+        donor = Donor(id, attributes, row)
         donors.append(donor)
 
-    try:
-        with open('test.txt', 'w', encoding='utf-8') as f:  # 'w' for write mode
-            f.write(str(donors) + '\n')
-    except Exception as e:
-        print(f"An error occurred: {e}")
     return (attributes, donors)

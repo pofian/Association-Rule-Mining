@@ -1,32 +1,27 @@
 from parse_dataset import read_donors
 from parse_rules import read_rules
+from utils import Rule
+from utils import Donor
+from utils import Condition
 
 
-def test_rule_on_donor(rule, donor_atributes):
-    for condition in rule["conditions"]:
-        variable = condition["variable"]
-        negated = condition["negated"]
-
-        if variable not in donor_atributes:
-            return False #if a required variable is missing, the rule can not be evaluated.
-
-        # print(donor_atributes[variable])
-        # print(type(donor_atributes[variable]))
-        if negated:
-            if donor_atributes[variable] == 'TRUE': #if negated, and the variable is true, the rule fails.
-                return False
-        else:
-            if donor_atributes[variable] == 'FALSE': #if not negated, and the variable is false, the rule fails.
-                return False
-
-    return True #all conditions were met.
-
+first_write = True
 def is_subrule_of(smaller_rule, bigger_rule) -> bool:
-    if (smaller_rule['matching_donors'].issubset(bigger_rule['matching_donors'])):
-        # print(f"Rule: \n{smaller_rule} \
-        #                 \nis subset of rule:\n{bigger_rule}\n")
-        return True
-    return False
+    if not smaller_rule.matching_donors.issubset(bigger_rule.matching_donors):
+        return False
+    
+    filename = 'logs/subset_removed_rules.txt'
+    try:
+        with open(filename, 'a', encoding='utf-8') as file:
+            global first_write
+            if first_write:
+                file.truncate(0)
+                first_write = False
+            file.write(f"First rule is a subset of the second rule ----- will be discarded.\
+            \n{smaller_rule}\n{bigger_rule}\n\n")
+    except Exception as e:
+        print(f"Error writing to {filename}: {e}")
+    return True
 
 def merge_rules(rules):
     i = 0
@@ -40,120 +35,87 @@ def merge_rules(rules):
         i += 1
 
 
-import math
+phi_threshold = 0.2
+precision_threshold = 0.5
+max_rules_count = 1000
 
-# https://en.wikipedia.org/wiki/Phi_coefficient
-def mean_square_contingency_coefficient(true_positives, false_positives, true_negatives, false_negatives):
-    """
-    Calculates the mean square contingency coefficient (Phi coefficient).
-
-    Returns:
-        float: The mean square contingency coefficient (Phi coefficient).
-    """
-    numerator = (true_positives * true_negatives) - (false_positives * false_negatives)
-    denominator = math.sqrt((true_positives + false_positives) *
-                            (true_negatives + false_negatives) *
-                            (true_positives + false_negatives) *
-                            (true_negatives + false_positives))
-
-    return float('-inf') if denominator == 0 else numerator / denominator
-
-
-def evaluate_rule(rule, donors):
-    true_positives = 0
-    false_positives = 0
-    true_negatives = 0
-    false_negatives = 0
-
-    matching_donors = set()
-    for donor in donors:
-        if (test_rule_on_donor(rule, donor['atrributes'])):
-            if (donor['donor_is_old'] == 'TRUE'):
-                true_positives += 1
-                matching_donors.add(donor['id'])
-            else:
-                false_positives += 1
-        else:
-            if (donor['donor_is_old'] == 'TRUE'):
-                false_negatives += 1
-            else:
-                true_negatives += 1
-
-    # print(f"{true_positives} {false_positives} {true_negatives} {false_negatives}")
-
-    phi = mean_square_contingency_coefficient(true_positives, false_positives, true_negatives, false_negatives)
-    rule['phi'] = round(phi, 4)
-    rule['matching_donors'] = matching_donors
-
-    if true_positives + false_positives == 0:
-        rule['precision'] = -1
-    else:
-        rule['precision'] = round(true_positives / (true_positives + false_positives), 4)
+def log_removed_rules(removed_rules):
+    filename = 'logs/threshold_removed_rules.txt'
+    try:
+        with open(filename, 'w', encoding='utf-8') as file:
+            for rule in removed_rules:
+                s = f"Rule '{rule.__repr__conditions__()}' will be discarded because "
+                text1 = None if rule.phi >= phi_threshold else f"phi = {rule.phi} < {phi_threshold}"
+                text2 = None if rule.precision >= precision_threshold else f"precision = {rule.precision} < {precision_threshold}"
+                if text1 is not None:
+                    s += text1
+                if text2 is not None:
+                    if text1 is not None:
+                        s += " AND "
+                    s += text2
+                s += '\n'
+                file.write(s)
+    except Exception as e:
+        print(f"Error writing to {filename}: {e}")
 
 
-def text(conditions):
-    s: string = ""
-    for i, condition in enumerate(conditions):
-        if i != 0:
-            s += " AND "
-        if condition['negated']:
-            s += "NOT "
-        s += condition['variable']
-
-    s += " => donor_is_old"
-    return s
-
-phi_threshold = 0.15
 def filter_rules(rules, donors):
     for rule in rules:
-        evaluate_rule(rule, donors)
+        rule.evaluate(donors)
 
-    rules = [rule for rule in rules if rule['phi'] > phi_threshold]
-    rules = sorted(rules, key=lambda x: x['phi'], reverse=True)
+    removed_rules = [rule for rule in rules if rule.phi  < phi_threshold  or rule.precision  < precision_threshold]
+    rules =         [rule for rule in rules if rule.phi >= phi_threshold and rule.precision >= precision_threshold]
+    log_removed_rules(removed_rules)
+
+    rules = sorted(rules, key=lambda rule: rule.phi, reverse=True)
+    rules = rules[:max_rules_count]
     merge_rules(rules)
-    for rule in rules:
-        del rule['matching_donors']
-        del rule['id']
-        rule['conditions'] = text(rule['conditions'])
 
     return rules
 
 
+def generate_synthetic_rules(attributes):
+    possible_conditions = []
+    synthetic_rules = []
+    for variable in attributes:
+        for negated in [False, True]:
+            possible_conditions.append(Condition(variable, negated))
+
+    n = len(possible_conditions)
+    for i in range(0, n + 1):
+        for j in range(i + 1, n + 1):
+            for k in range(j + 1, n + 1):
+                pc1 = possible_conditions[i] if i != n else None
+                pc2 = possible_conditions[j] if j != n else None
+                pc3 = possible_conditions[k] if k != n else None
+                conditions = [x for x in [pc1, pc2, pc3] if x is not None]
+                rule = Rule(n, conditions)
+                synthetic_rules.append(rule)
+
+    return synthetic_rules
+
+
 def main():
-    print("program start..................\n")
+    print("program start..\n")
 
     rules = read_rules()
     (attributes, donors) = read_donors()
 
-    old_donors_count  = len([donor for donor in donors if donor['donor_is_old'] == 'TRUE'])
-    young_donor_count = len([donor for donor in donors if donor['donor_is_old'] == 'FALSE'])
-
     rules = filter_rules(rules, donors)
-    for rule in rules:
-        # print()
-        print(rule)
 
-    # print(attributes)
+    try:
+        with open('compressed_rules.txt', 'w', encoding='utf-8') as f:
+            for rule in rules:
+                f.write(str(rule) + '\n')
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
-    n = 100
-
-    synthetic_rules = []
-    for variable in attributes:
-        for negated in [False, True]:
-            n += 1
-            conditions = [{"variable": variable, "negated": negated}]
-            rule = {"id": n, "conditions": conditions, "result": "donor_is_old"}
-            synthetic_rules.append(rule)
-    
-    print('\n' + "#" * 100 + '\n')
-
-    synthetic_rules = filter_rules(synthetic_rules, donors)
-    for rule in synthetic_rules:
-        # print()
-        print(rule)
-        pass
+    # print('\n' + "#" * 100 + '\n')
+    # synthetic_rules = generate_synthetic_rules(attributes)
+    # synthetic_rules = filter_rules(synthetic_rules, donors)
+    # for rule in synthetic_rules:
+    #     print(rule)
 
 
-    
-
-main()
+if __name__ == "__main__":
+    main()
