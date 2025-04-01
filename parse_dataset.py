@@ -29,7 +29,7 @@ file_path = "dataset.tsv"  # Replace with your TSV file path
 
 parsed_data = read_tsv(file_path)
 
-def make_table():
+def read_donors():
     attributes = parsed_data[0]
     donors = []
 
@@ -38,8 +38,8 @@ def make_table():
             continue
         donor = {'id': id, 'donor_is_old': row[0]}
         donor['atrributes'] = {attribute: value for attribute, value in zip(attributes[1:], row[1:])}
-        print(donor)
-        print("\n")
+        # print(donor)
+        # print("\n")
         donors.append(donor)
 
     try:
@@ -47,5 +47,4 @@ def make_table():
             f.write(str(donors) + '\n')
     except Exception as e:
         print(f"An error occurred: {e}")
-
-make_table()
+    return donors
