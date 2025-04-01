@@ -1,6 +1,7 @@
 import csv
 
-def read_tsv(file_path, delimiter='\t', quotechar=None):
+file_path = "dataset.tsv"
+def read_tsv(file_path=file_path, delimiter='\t', quotechar=None):
     """
     Reads data from a TSV (Tab Separated Values) file and returns a list of lists,
     where each inner list represents a row in the TSV file.
@@ -25,12 +26,10 @@ def read_tsv(file_path, delimiter='\t', quotechar=None):
         print(f"An error occurred: {e}")
         return None
 
-file_path = "dataset.tsv"  # Replace with your TSV file path
-
-parsed_data = read_tsv(file_path)
-
 def read_donors():
-    attributes = parsed_data[0]
+    parsed_data = read_tsv()
+
+    attributes = parsed_data[0] # First line
     donors = []
 
     for id, row in enumerate(parsed_data):
@@ -47,4 +46,4 @@ def read_donors():
             f.write(str(donors) + '\n')
     except Exception as e:
         print(f"An error occurred: {e}")
-    return donors
+    return (attributes, donors)
