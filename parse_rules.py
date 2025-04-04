@@ -1,6 +1,6 @@
-import re
 from utils import Rule
 from utils import Condition
+from typing import List
 
 n = 0
 def rule_from_line(line) -> Rule:
@@ -33,7 +33,7 @@ def rule_from_line(line) -> Rule:
 
 
 file_path = "rules.txt"
-def read_rules(file_path = file_path):
+def read_rules(file_path = file_path) -> List[Rule]:
     """
     Reads and interprets rules from a file, returning a list of dictionaries.
 

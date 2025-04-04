@@ -1,5 +1,6 @@
 import csv
 from utils import Donor
+from typing import List
 
 file_path = "dataset.tsv"
 def read_tsv(file_path=file_path, delimiter='\t', quotechar=None):
@@ -27,7 +28,7 @@ def read_tsv(file_path=file_path, delimiter='\t', quotechar=None):
         print(f"An error occurred: {e}")
         return None
 
-def read_donors():
+def read_donors() -> tuple[List[str], List[Donor]]:
     parsed_data = read_tsv()
 
     attributes = parsed_data[0] # First line

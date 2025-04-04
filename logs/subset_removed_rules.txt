@@ -1,52 +1,52 @@
-First rule is a subset of the second rule ----- will be discarded.            
-NOT Hb AND NOT Notch_1 => donor_is_old .............................................. phi: 0.513 precision: 0.75
-NOT Hb AND NOT Lymphocytes AND NOT Notch_1 => donor_is_old .......................... phi: 0.688 precision: 0.882
+First rule is a subset of the second rule ----- will be discarded.
+NOT Hb AND NOT Notch_1 => donor_is_old
+NOT Hb AND NOT Lymphocytes AND NOT Notch_1 => donor_is_old
 
-First rule is a subset of the second rule ----- will be discarded.            
-NOT HCT AND NOT Notch_1 => donor_is_old ............................................. phi: 0.406 precision: 0.722
-NOT HCT AND NOT Lymphocytes AND NOT Notch_1 => donor_is_old ......................... phi: 0.655 precision: 0.929
+First rule is a subset of the second rule ----- will be discarded.
+NOT Hb AND NOT Lymphocytes => donor_is_old
+NOT Hb AND NOT Lymphocytes AND NOT Notch_1 => donor_is_old
 
-First rule is a subset of the second rule ----- will be discarded.            
-NOT Basophils AND NOT Lymphocytes AND NOT Notch_1 => donor_is_old ................... phi: 0.499 precision: 0.846
-NOT Basophils_percent AND NOT Lymphocytes AND NOT Notch_1 => donor_is_old ........... phi: 0.592 precision: 0.867
+First rule is a subset of the second rule ----- will be discarded.
+NOT HCT AND NOT Notch_1 => donor_is_old
+NOT HCT AND NOT Lymphocytes AND NOT Notch_1 => donor_is_old
 
-First rule is a subset of the second rule ----- will be discarded.            
-NOT Basophils_percent AND NOT Notch_1 => donor_is_old ............................... phi: 0.351 precision: 0.684
-NOT Basophils_percent AND NOT Lymphocytes AND NOT Notch_1 => donor_is_old ........... phi: 0.592 precision: 0.867
+First rule is a subset of the second rule ----- will be discarded.
+NOT Basophils AND NOT Lymphocytes AND NOT Notch_1 => donor_is_old
+NOT Basophils_percent AND NOT Lymphocytes AND NOT Notch_1 => donor_is_old
 
-First rule is a subset of the second rule ----- will be discarded.            
-NOT Notch_1 => donor_is_old ......................................................... phi: 0.26 precision: 0.593
-NOT Lymphocytes_percent AND NOT Notch_1 => donor_is_old ............................. phi: 0.582 precision: 0.762
+First rule is a subset of the second rule ----- will be discarded.
+NOT Basophils_percent AND NOT Notch_1 => donor_is_old
+NOT Basophils_percent AND NOT Lymphocytes AND NOT Notch_1 => donor_is_old
 
-First rule is a subset of the second rule ----- will be discarded.            
-NOT IL_4 AND NOT Lymphocytes => donor_is_old ........................................ phi: 0.332 precision: 0.667
-NOT Lymphocytes AND NOT Notch_1 => donor_is_old ..................................... phi: 0.533 precision: 0.727
+First rule is a subset of the second rule ----- will be discarded.
+NOT Notch_1 => donor_is_old
+NOT Lymphocytes_percent AND NOT Notch_1 => donor_is_old
 
-First rule is a subset of the second rule ----- will be discarded.            
-NOT IFN_γ AND NOT Lymphocytes => donor_is_old ....................................... phi: 0.281 precision: 0.636
-NOT Lymphocytes AND NOT Notch_1 => donor_is_old ..................................... phi: 0.533 precision: 0.727
+First rule is a subset of the second rule ----- will be discarded.
+NOT IL_4 AND NOT Lymphocytes => donor_is_old
+NOT Lymphocytes AND NOT Notch_1 => donor_is_old
 
-First rule is a subset of the second rule ----- will be discarded.            
-NOT IL_2 AND NOT Lymphocytes => donor_is_old ........................................ phi: 0.281 precision: 0.636
-NOT Lymphocytes AND NOT Notch_1 => donor_is_old ..................................... phi: 0.533 precision: 0.727
+First rule is a subset of the second rule ----- will be discarded.
+NOT IFN_γ AND NOT Lymphocytes => donor_is_old
+NOT Lymphocytes AND NOT Notch_1 => donor_is_old
 
-First rule is a subset of the second rule ----- will be discarded.            
-NOT IL_10 AND NOT Lymphocytes => donor_is_old ....................................... phi: 0.23 precision: 0.619
-NOT Lymphocytes AND NOT Notch_1 => donor_is_old ..................................... phi: 0.533 precision: 0.727
+First rule is a subset of the second rule ----- will be discarded.
+NOT IL_2 AND NOT Lymphocytes => donor_is_old
+NOT Lymphocytes AND NOT Notch_1 => donor_is_old
 
-First rule is a subset of the second rule ----- will be discarded.            
-NOT IL_12p70 AND NOT Lymphocytes => donor_is_old .................................... phi: 0.23 precision: 0.619
-NOT Lymphocytes AND NOT Notch_1 => donor_is_old ..................................... phi: 0.533 precision: 0.727
+First rule is a subset of the second rule ----- will be discarded.
+NOT IL_10 AND NOT Lymphocytes => donor_is_old
+NOT Lymphocytes AND NOT Notch_1 => donor_is_old
 
-First rule is a subset of the second rule ----- will be discarded.            
-NOT Hb AND NOT IL_10 => donor_is_old ................................................ phi: 0.282 precision: 0.65
-NOT Hb AND NOT IFN_γ => donor_is_old ................................................ phi: 0.384 precision: 0.7
+First rule is a subset of the second rule ----- will be discarded.
+NOT IL_12p70 AND NOT Lymphocytes => donor_is_old
+NOT Lymphocytes AND NOT Notch_1 => donor_is_old
 
-First rule is a subset of the second rule ----- will be discarded.            
-NOT Hb AND NOT IL_12p70 => donor_is_old ............................................. phi: 0.282 precision: 0.65
-NOT Hb AND NOT IL_2 => donor_is_old ................................................. phi: 0.384 precision: 0.7
+First rule is a subset of the second rule ----- will be discarded.
+NOT Hb AND NOT IL_10 => donor_is_old
+NOT Hb AND NOT IFN_γ => donor_is_old
 
-First rule is a subset of the second rule ----- will be discarded.            
-Monocytes => donor_is_old ........................................................... phi: 0.22 precision: 0.7
-Monocytes AND NOT sCD86 => donor_is_old ............................................. phi: 0.368 precision: 0.875
+First rule is a subset of the second rule ----- will be discarded.
+NOT Hb AND NOT IL_12p70 => donor_is_old
+NOT Hb AND NOT IL_2 => donor_is_old
 
