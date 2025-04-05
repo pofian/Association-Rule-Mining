@@ -62,7 +62,7 @@ class Rule:
                     false_negatives += 1
                 case (False, False):
                     true_negatives += 1
-                    matching_donors.add(-donor.id)
+                    # matching_donors.add(-donor.id)
 
         phi = Rule.mean_square_contingency_coefficient(true_positives, false_positives, true_negatives, false_negatives)
         self.phi = round(phi, 2)

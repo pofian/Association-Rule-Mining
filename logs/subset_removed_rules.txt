@@ -1,4 +1,12 @@
 First rule is a subset of the second rule ----- will be discarded.
+NOT HCT AND NOT Lymphocytes AND NOT Notch_1 => donor_is_old
+NOT Hb AND NOT Lymphocytes AND NOT Notch_1 => donor_is_old
+
+First rule is a subset of the second rule ----- will be discarded.
+NOT Basophils_percent AND NOT Lymphocytes AND NOT Notch_1 => donor_is_old
+NOT Hb AND NOT Lymphocytes AND NOT Notch_1 => donor_is_old
+
+First rule is a subset of the second rule ----- will be discarded.
 NOT Hb AND NOT Notch_1 => donor_is_old
 NOT Hb AND NOT Lymphocytes AND NOT Notch_1 => donor_is_old
 
@@ -7,40 +15,72 @@ NOT Hb AND NOT Lymphocytes => donor_is_old
 NOT Hb AND NOT Lymphocytes AND NOT Notch_1 => donor_is_old
 
 First rule is a subset of the second rule ----- will be discarded.
-NOT HCT AND NOT Notch_1 => donor_is_old
-NOT HCT AND NOT Lymphocytes AND NOT Notch_1 => donor_is_old
+NOT Basophils AND NOT Lymphocytes AND NOT Notch_1 => donor_is_old
+NOT Hb AND NOT Lymphocytes AND NOT Notch_1 => donor_is_old
 
 First rule is a subset of the second rule ----- will be discarded.
-NOT Basophils AND NOT Lymphocytes AND NOT Notch_1 => donor_is_old
-NOT Basophils_percent AND NOT Lymphocytes AND NOT Notch_1 => donor_is_old
+NOT Hb AND NOT Lymphocytes_percent => donor_is_old
+NOT Hb AND NOT Lymphocytes AND NOT Notch_1 => donor_is_old
+
+First rule is a subset of the second rule ----- will be discarded.
+NOT Notch_1 AND NOT RBC => donor_is_old
+NOT Hb AND NOT Lymphocytes AND NOT Notch_1 => donor_is_old
+
+First rule is a subset of the second rule ----- will be discarded.
+NOT HCT AND NOT Notch_1 => donor_is_old
+NOT Hb AND NOT Lymphocytes AND NOT Notch_1 => donor_is_old
+
+First rule is a subset of the second rule ----- will be discarded.
+NOT Hb AND NOT Monocytes AND NOT Notch_1 => donor_is_old
+NOT Hb AND NOT Lymphocytes AND NOT Notch_1 => donor_is_old
+
+First rule is a subset of the second rule ----- will be discarded.
+NOT HCT AND NOT Monocytes AND NOT Notch_1 => donor_is_old
+NOT Hb AND NOT Lymphocytes AND NOT Notch_1 => donor_is_old
 
 First rule is a subset of the second rule ----- will be discarded.
 NOT Basophils_percent AND NOT Notch_1 => donor_is_old
-NOT Basophils_percent AND NOT Lymphocytes AND NOT Notch_1 => donor_is_old
+NOT Hb AND NOT Lymphocytes AND NOT Notch_1 => donor_is_old
+
+First rule is a subset of the second rule ----- will be discarded.
+Monocytes_percent => donor_is_old
+NOT Hb AND NOT Lymphocytes AND NOT Notch_1 => donor_is_old
+
+First rule is a subset of the second rule ----- will be discarded.
+NOT Lymphocytes AND NOT Notch_1 => donor_is_old
+NOT Lymphocytes_percent AND NOT Notch_1 => donor_is_old
+
+First rule is a subset of the second rule ----- will be discarded.
+NOT Lymphocytes AND NOT sCD86 => donor_is_old
+NOT Lymphocytes_percent AND NOT Notch_1 => donor_is_old
+
+First rule is a subset of the second rule ----- will be discarded.
+Eosinophils_percent => donor_is_old
+NOT Lymphocytes_percent AND NOT Notch_1 => donor_is_old
+
+First rule is a subset of the second rule ----- will be discarded.
+NOT IL_4 AND NOT Lymphocytes => donor_is_old
+NOT Lymphocytes_percent AND NOT Notch_1 => donor_is_old
 
 First rule is a subset of the second rule ----- will be discarded.
 NOT Notch_1 => donor_is_old
 NOT Lymphocytes_percent AND NOT Notch_1 => donor_is_old
 
 First rule is a subset of the second rule ----- will be discarded.
-NOT IL_4 AND NOT Lymphocytes => donor_is_old
-NOT Lymphocytes AND NOT Notch_1 => donor_is_old
-
-First rule is a subset of the second rule ----- will be discarded.
 NOT IFN_γ AND NOT Lymphocytes => donor_is_old
-NOT Lymphocytes AND NOT Notch_1 => donor_is_old
+NOT Lymphocytes_percent AND NOT Notch_1 => donor_is_old
 
 First rule is a subset of the second rule ----- will be discarded.
 NOT IL_2 AND NOT Lymphocytes => donor_is_old
-NOT Lymphocytes AND NOT Notch_1 => donor_is_old
+NOT Lymphocytes_percent AND NOT Notch_1 => donor_is_old
 
 First rule is a subset of the second rule ----- will be discarded.
 NOT IL_10 AND NOT Lymphocytes => donor_is_old
-NOT Lymphocytes AND NOT Notch_1 => donor_is_old
+NOT Lymphocytes_percent AND NOT Notch_1 => donor_is_old
 
 First rule is a subset of the second rule ----- will be discarded.
 NOT IL_12p70 AND NOT Lymphocytes => donor_is_old
-NOT Lymphocytes AND NOT Notch_1 => donor_is_old
+NOT Lymphocytes_percent AND NOT Notch_1 => donor_is_old
 
 First rule is a subset of the second rule ----- will be discarded.
 NOT Hb AND NOT IL_10 => donor_is_old
@@ -49,4 +89,8 @@ NOT Hb AND NOT IFN_γ => donor_is_old
 First rule is a subset of the second rule ----- will be discarded.
 NOT Hb AND NOT IL_12p70 => donor_is_old
 NOT Hb AND NOT IL_2 => donor_is_old
+
+First rule is a subset of the second rule ----- will be discarded.
+NOT Lymphocytes => donor_is_old
+NOT Lymphocytes_percent => donor_is_old
 
